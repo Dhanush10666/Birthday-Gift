@@ -54,9 +54,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background: #ff0f66;
-}
+button:hover { background: #ff0f66; }
 
 .hidden { display: none; }
 
@@ -126,25 +124,22 @@ button:hover {
   margin-bottom: 24px;
 }
 
-.popup-content p {
+.popup-text {
+  max-width: 240px;
+  margin: 0 auto 12px;
   font-size: 14.5px;
   line-height: 1.6;
   color: #666;
-  margin-bottom: 12px;
 }
 
-.popup-content .highlight {
-  color: #ff5f9e;
-  font-weight: 500;
-}
-
-.popup-content .signature {
-  margin-top: 12px;
-  color: #ff2f7a;
+.signature {
+  margin-top: 20px;
+  font-size: 15px;
   font-weight: 600;
+  color: #ff2f7a;
 }
 
-/* 🎉 BLAST CONFETTI */
+/* 🎉 CONFETTI BLAST */
 .confetti {
   position: fixed;
   width: 10px;
@@ -162,7 +157,7 @@ button:hover {
   to { transform: translate(var(--x), var(--y)) scale(0.2); opacity: 0; }
 }
 
-/* ANIMATION */
+/* FADE */
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.92); }
   to { opacity: 1; transform: scale(1); }
@@ -195,12 +190,12 @@ button:hover {
   </div>
 
   <div class="photo">
-    <img src="Janu.jpg" onclick="openPrePopup()">
+    <img src="janu.jpg" onclick="openPrePopup()">
     <p>Tap me 💌</p>
   </div>
 
   <audio id="song" loop>
-    <source src="song.m4r" type="audio/mp4">
+    <source src="song.mp3" type="audio/mpeg">
   </audio>
 </div>
 
@@ -208,8 +203,8 @@ button:hover {
 <div class="popup" id="prePopup">
   <div class="popup-content">
     <h3>Hey Janu 💗</h3>
-    <p>Before you see this wish,<br>take a deep breath 🌸</p>
-    <p class="highlight">Ready for a surprise? 😊</p>
+    <p class="popup-text">Before you see this wish,<br>take a deep breath 🌸</p>
+    <p class="popup-text">Ready for a surprise? 😊</p>
     <button onclick="goToMainPopup()">Yes ❤️</button>
   </div>
 </div>
@@ -218,18 +213,25 @@ button:hover {
 <div class="popup" id="mainPopup" onclick="closePopup()">
   <div class="popup-content">
     <h3>Thimir Piduchavaley 🤚🏻</h3>
-    <p>
+
+    <p class="popup-text">
       From 17 Feb 2004 till now,<br>
       every single second you existed,<br>
       made this world more beautiful 🌷
     </p>
+
+    <p class="popup-text">
       I know how much pain you’ve gone through.
     </p>
+
     <p class="popup-text">
       Just know I’ll always be there for you,<br>
       no matter what 🤍
     </p>
-    <p class="signature">Happy Birthday and Love You 🫶🏻</p>
+
+    <p class="signature">
+      Happy Birthday and Love You Mami 🫶🏻
+    </p>
   </div>
 </div>
 
@@ -273,9 +275,9 @@ function birthdayBlast() {
     const c = document.createElement("div");
     c.className = "confetti";
     const angle = Math.random() * 360;
-    const distance = Math.random() * 300 + 100;
-    c.style.setProperty("--x", Math.cos(angle) * distance + "px");
-    c.style.setProperty("--y", Math.sin(angle) * distance + "px");
+    const dist = Math.random() * 300 + 100;
+    c.style.setProperty("--x", Math.cos(angle) * dist + "px");
+    c.style.setProperty("--y", Math.sin(angle) * dist + "px");
     c.style.background = ["#ff2f7a","#ff8fcf","#ffd6e0","#fff"][Math.floor(Math.random()*4)];
     document.body.appendChild(c);
     setTimeout(() => c.remove(), 1000);
