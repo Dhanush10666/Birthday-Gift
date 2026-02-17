@@ -6,168 +6,180 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-body {
-  height: 100vh;
-  background: linear-gradient(135deg,#6a1d3c,#8b2a52);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: -apple-system, BlinkMacSystemFont, "Poppins", sans-serif;
-  color: #fff;
+body{
+  height:100vh;
+  background:linear-gradient(135deg,#6a1d3c,#8b2a52);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:-apple-system,BlinkMacSystemFont,"Poppins",sans-serif;
+  color:#fff;
+  overflow:hidden;
+}
+
+/* FLOATING HEARTS */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:18px;
+  animation:floatUp linear forwards;
+  opacity:0.7;
+  pointer-events:none;
+}
+
+@keyframes floatUp{
+  from{
+    transform:translateY(0) scale(1);
+    opacity:0.8;
+  }
+  to{
+    transform:translateY(-110vh) scale(1.6);
+    opacity:0;
+  }
 }
 
 /* CARD */
-.card {
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(18px);
-  padding: 32px;
-  border-radius: 24px;
-  width: 90%;
-  max-width: 420px;
-  text-align: center;
-  animation: fadeIn 1s ease;
+.card{
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(18px);
+  padding:32px;
+  border-radius:24px;
+  width:90%;
+  max-width:420px;
+  text-align:center;
+  animation:fadeIn 1s ease;
+  position:relative;
+  z-index:2;
 }
 
-input {
-  width: 100%;
-  padding: 14px;
-  margin: 10px 0;
-  border-radius: 14px;
-  border: none;
-  outline: none;
+input{
+  width:100%;
+  padding:14px;
+  margin:10px 0;
+  border-radius:14px;
+  border:none;
+  outline:none;
 }
 
-button {
-  margin-top: 14px;
-  padding: 12px 28px;
-  border-radius: 24px;
-  border: none;
-  background: #ff2f7a;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
+button{
+  margin-top:14px;
+  padding:12px 28px;
+  border-radius:24px;
+  border:none;
+  background:#ff2f7a;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
 }
 
-button:hover { background: #ff0f66; }
+button:hover{background:#ff0f66;}
+.hidden{display:none;}
+.error{margin-top:10px;color:#ffd6e0;}
 
-.hidden { display: none; }
-
-.error {
-  margin-top: 10px;
-  color: #ffd6e0;
+.age-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  margin-top:22px;
 }
 
-/* AGE GRID */
-.age-grid {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 14px;
-  margin-top: 22px;
+.box{
+  background:rgba(255,255,255,0.25);
+  padding:14px;
+  border-radius:16px;
 }
 
-.box {
-  background: rgba(255,255,255,0.25);
-  padding: 14px;
-  border-radius: 16px;
-}
-
-.box h3 { font-size: 20px; font-weight: 600; }
-.box p { font-size: 12px; opacity: 0.85; }
+.box h3{font-size:20px;font-weight:600;}
+.box p{font-size:12px;opacity:0.85;}
 
 /* PHOTO */
-.photo { margin-top: 26px; }
-
-.photo img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid white;
-  cursor: pointer;
-  transition: transform 0.3s ease;
+.photo{margin-top:26px;}
+.photo img{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid white;
+  cursor:pointer;
+  transition:transform 0.3s ease;
 }
-
-.photo img:hover { transform: scale(1.05); }
+.photo img:hover{transform:scale(1.05);}
 
 /* POPUPS */
-.popup {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:10;
 }
 
-.popup-content {
-  background: #ffffff;
-  padding: 28px;
-  border-radius: 20px;
-  width: 85%;
-  max-width: 320px;
-  text-align: center;
-  animation: fadeIn 0.8s ease;
+.popup-content{
+  background:#fff;
+  padding:28px;
+  border-radius:20px;
+  width:85%;
+  max-width:320px;
+  text-align:center;
+  animation:fadeIn 0.8s ease;
 }
 
-/* TEXT HIERARCHY */
-.popup-content h3 {
-  font-size: 20px;
-  font-weight: 600;
-  color: #ff2f7a;
-  margin-bottom: 24px;
+/* 🔥 GLOWING 22 */
+.glow22{
+  font-size:42px;
+  font-weight:700;
+  margin:15px 0;
+  color:#ff2f7a;
+  animation:glowPulse 1.5s infinite alternate;
 }
 
-.popup-text {
-  max-width: 240px;
-  margin: 0 auto 12px;
-  font-size: 14.5px;
-  line-height: 1.6;
-  color: #666;
+@keyframes glowPulse{
+  from{
+    text-shadow:0 0 8px #ff2f7a,0 0 15px #ff5c9e;
+  }
+  to{
+    text-shadow:0 0 18px #ff2f7a,0 0 35px #ff8fcf;
+  }
 }
 
-.signature {
-  margin-top: 20px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #ff2f7a;
+.popup-content h3{
+  font-size:20px;
+  font-weight:600;
+  color:#ff2f7a;
+  margin-bottom:16px;
 }
 
-/* 🎉 CONFETTI BLAST */
-.confetti {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  opacity: 0.9;
-  animation: blast 900ms ease-out forwards;
-  z-index: 999;
+.popup-text{
+  font-size:14.5px;
+  line-height:1.6;
+  color:#666;
+  margin-bottom:10px;
 }
 
-@keyframes blast {
-  from { transform: translate(0,0) scale(1); opacity: 1; }
-  to { transform: translate(var(--x), var(--y)) scale(0.2); opacity: 0; }
+.signature{
+  margin-top:16px;
+  font-size:15px;
+  font-weight:600;
+  color:#ff2f7a;
 }
 
-/* FADE */
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.92); }
-  to { opacity: 1; transform: scale(1); }
+@keyframes fadeIn{
+  from{opacity:0;transform:scale(0.92);}
+  to{opacity:1;transform:scale(1);}
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
 <div class="card" id="loginCard">
   <h2>🔐 Private Entry</h2>
   <input id="userId" placeholder="Login ID">
@@ -176,7 +188,6 @@ button:hover { background: #ff0f66; }
   <div class="error" id="errorMsg"></div>
 </div>
 
-<!-- MAIN -->
 <div class="card hidden" id="mainCard">
   <h2>Happiest Birthday To You! 😊</h2>
 
@@ -193,111 +204,74 @@ button:hover { background: #ff0f66; }
     <img src="Image.jpg" onclick="openPrePopup()">
     <p>Tap me 💌</p>
   </div>
-
-  <audio id="song" loop>
-    <source src="song.m4r" type="audio/mp4">
-  </audio>
 </div>
 
-<!-- PRE POPUP -->
-<div class="popup" id="prePopup">
-  <div class="popup-content">
-    <h3>Hey Janu 💗</h3>
-    <p class="popup-text">Before you see this wish,<br>take a deep breath 🌸</p>
-    <p class="popup-text">Ready for a surprise? 😊</p>
-    <button onclick="goToMainPopup()">Yes ❤️</button>
-  </div>
-</div>
-
-<!-- MAIN POPUP -->
+<!-- POPUP -->
 <div class="popup" id="mainPopup" onclick="closePopup()">
   <div class="popup-content">
-    <h3>Thimir Piduchavaley 🤚🏻</h3>
+    <h3>Happy Birthday 💖</h3>
+
+    <div class="glow22">22</div>
 
     <p class="popup-text">
-      From 17 Feb 2004 till now,<br>
-      every single second you existed,<br>
-      made this world more beautiful 🌷
-    </p>
-
-    <p class="popup-text">
-      I know how much pain you’ve gone through.
-    </p>
-
-    <p class="popup-text">
-      Just know I’ll always be there for you,
-      no matter what 🤍
+      Today you officially turned 22 🎉  
+      And the world became brighter.
     </p>
 
     <p class="signature">
-      Happy Birthday and Love You Mami 🫶🏻
+      Love You Mami 🫶🏻
     </p>
   </div>
 </div>
 
 <script>
-function handleLogin() {
-  if (userId.value === "Janu" && userPass.value === "Thimirpidithaval") {
+function handleLogin(){
+  if(userId.value==="Janu" && userPass.value==="Thimirpidithaval"){
     loginCard.classList.add("hidden");
     mainCard.classList.remove("hidden");
     startAge();
-  } else {
-    errorMsg.innerText = "Wrong ID or Password 💔";
+    startHearts();
+  }else{
+    errorMsg.innerText="Wrong ID or Password 💔";
   }
 }
 
-function startAge() {
-  const dob = new Date("2004-02-17T00:00:00");
-  setInterval(() => {
-    const diff = new Date() - dob;
-    const s = Math.floor(diff / 1000);
-    const m = Math.floor(s / 60);
-    const h = Math.floor(m / 60);
-    const d = Math.floor(h / 24);
-    const mo = Math.floor(d / 30.44);
-    const y = Math.floor(mo / 12);
-
-    years.innerText = y;
-    months.innerText = mo % 12;
-    days.innerText = d % 30;
-    hours.innerText = h % 24;
-    minutes.innerText = m % 60;
-    seconds.innerText = s % 60;
-  }, 1000);
+function startAge(){
+  const dob=new Date(2004,1,17);
+  setInterval(()=>{
+    const now=new Date();
+    let y=now.getFullYear()-dob.getFullYear();
+    let m=now.getMonth()-dob.getMonth();
+    let d=now.getDate()-dob.getDate();
+    if(d<0){m--;d+=new Date(now.getFullYear(),now.getMonth(),0).getDate();}
+    if(m<0){y--;m+=12;}
+    years.innerText=y;
+    months.innerText=m;
+    days.innerText=d;
+    hours.innerText=now.getHours();
+    minutes.innerText=now.getMinutes();
+    seconds.innerText=now.getSeconds();
+  },1000);
 }
 
-function openPrePopup() {
-  prePopup.style.display = "flex";
+function startHearts(){
+  setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerText="💖";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(Math.random()*4+4)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),8000);
+  },500);
 }
 
-function birthdayBlast() {
-  for (let i = 0; i < 40; i++) {
-    const c = document.createElement("div");
-    c.className = "confetti";
-    const angle = Math.random() * 360;
-    const dist = Math.random() * 300 + 100;
-    c.style.setProperty("--x", Math.cos(angle) * dist + "px");
-    c.style.setProperty("--y", Math.sin(angle) * dist + "px");
-    c.style.background = ["#ff2f7a","#ff8fcf","#ffd6e0","#fff"][Math.floor(Math.random()*4)];
-    document.body.appendChild(c);
-    setTimeout(() => c.remove(), 1000);
-  }
+function openPrePopup(){
+  mainPopup.style.display="flex";
 }
 
-function goToMainPopup() {
-  prePopup.style.display = "none";
-  birthdayBlast();
-  setTimeout(() => {
-    mainPopup.style.display = "flex";
-    song.currentTime = 0;
-    song.play();
-  }, 400);
-}
-
-function closePopup() {
-  mainPopup.style.display = "none";
-  song.pause();
-  song.currentTime = 0;
+function closePopup(){
+  mainPopup.style.display="none";
 }
 </script>
 
