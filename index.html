@@ -31,17 +31,12 @@ body{
   animation:floatUp linear forwards;
   opacity:0.7;
   pointer-events:none;
+  z-index:1;
 }
 
 @keyframes floatUp{
-  from{
-    transform:translateY(0) scale(1);
-    opacity:0.8;
-  }
-  to{
-    transform:translateY(-110vh) scale(1.6);
-    opacity:0;
-  }
+  from{transform:translateY(0) scale(1);opacity:0.8;}
+  to{transform:translateY(-110vh) scale(1.6);opacity:0;}
 }
 
 /* CARD */
@@ -82,6 +77,7 @@ button:hover{background:#ff0f66;}
 .hidden{display:none;}
 .error{margin-top:10px;color:#ffd6e0;}
 
+/* AGE GRID */
 .age-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -132,22 +128,18 @@ button:hover{background:#ff0f66;}
   animation:fadeIn 0.8s ease;
 }
 
-/* 🔥 GLOWING 22 */
+/* GLOWING 22 */
 .glow22{
-  font-size:42px;
+  font-size:34px;
   font-weight:700;
-  margin:15px 0;
+  margin:10px 0;
   color:#ff2f7a;
   animation:glowPulse 1.5s infinite alternate;
 }
 
 @keyframes glowPulse{
-  from{
-    text-shadow:0 0 8px #ff2f7a,0 0 15px #ff5c9e;
-  }
-  to{
-    text-shadow:0 0 18px #ff2f7a,0 0 35px #ff8fcf;
-  }
+  from{text-shadow:0 0 8px #ff2f7a,0 0 15px #ff5c9e;}
+  to{text-shadow:0 0 18px #ff2f7a,0 0 35px #ff8fcf;}
 }
 
 .popup-content h3{
@@ -171,6 +163,23 @@ button:hover{background:#ff0f66;}
   color:#ff2f7a;
 }
 
+.confetti{
+  position:fixed;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  top:50%;
+  left:50%;
+  opacity:0.9;
+  animation:blast 900ms ease-out forwards;
+  z-index:999;
+}
+
+@keyframes blast{
+  from{transform:translate(0,0) scale(1);opacity:1;}
+  to{transform:translate(var(--x),var(--y)) scale(0.2);opacity:0;}
+}
+
 @keyframes fadeIn{
   from{opacity:0;transform:scale(0.92);}
   to{opacity:1;transform:scale(1);}
@@ -180,6 +189,7 @@ button:hover{background:#ff0f66;}
 
 <body>
 
+<!-- LOGIN -->
 <div class="card" id="loginCard">
   <h2>🔐 Private Entry</h2>
   <input id="userId" placeholder="Login ID">
@@ -188,6 +198,7 @@ button:hover{background:#ff0f66;}
   <div class="error" id="errorMsg"></div>
 </div>
 
+<!-- MAIN -->
 <div class="card hidden" id="mainCard">
   <h2>Happiest Birthday To You! 😊</h2>
 
@@ -204,22 +215,46 @@ button:hover{background:#ff0f66;}
     <img src="Image.jpg" onclick="openPrePopup()">
     <p>Tap me 💌</p>
   </div>
+
+  <audio id="song" loop>
+    <source src="song.m4r" type="audio/mp4">
+  </audio>
 </div>
 
-<!-- POPUP -->
+<!-- PRE POPUP -->
+<div class="popup" id="prePopup">
+  <div class="popup-content">
+    <h3>Hey Janu 💗</h3>
+    <p class="popup-text">Before you see this wish,<br>take a deep breath 🌸</p>
+    <p class="popup-text">Ready for a surprise? 😊</p>
+    <button onclick="goToMainPopup()">Yes ❤️</button>
+  </div>
+</div>
+
+<!-- MAIN POPUP -->
 <div class="popup" id="mainPopup" onclick="closePopup()">
   <div class="popup-content">
-    <h3>Happy Birthday 💖</h3>
+    <h3>Thimir Piduchavaley 🤚🏻</h3>
 
     <div class="glow22">22</div>
 
     <p class="popup-text">
-      Today you officially turned 22 🎉  
-      And the world became brighter.
+      From 17 Feb 2004 till now,<br>
+      every single second you existed,<br>
+      made this world more beautiful 🌷
+    </p>
+
+    <p class="popup-text">
+      I know how much pain you’ve gone through.
+    </p>
+
+    <p class="popup-text">
+      Just know I’ll always be there for you,
+      no matter what 🤍
     </p>
 
     <p class="signature">
-      Love You Mami 🫶🏻
+      Happy Birthday and Love You Mami 🫶🏻
     </p>
   </div>
 </div>
@@ -263,15 +298,41 @@ function startHearts(){
     heart.style.animationDuration=(Math.random()*4+4)+"s";
     document.body.appendChild(heart);
     setTimeout(()=>heart.remove(),8000);
-  },500);
+  },600);
 }
 
 function openPrePopup(){
-  mainPopup.style.display="flex";
+  prePopup.style.display="flex";
+}
+
+function birthdayBlast(){
+  for(let i=0;i<40;i++){
+    const c=document.createElement("div");
+    c.className="confetti";
+    const angle=Math.random()*2*Math.PI;
+    const dist=Math.random()*300+100;
+    c.style.setProperty("--x",Math.cos(angle)*dist+"px");
+    c.style.setProperty("--y",Math.sin(angle)*dist+"px");
+    c.style.background=["#ff2f7a","#ff8fcf","#ffd6e0","#fff"][Math.floor(Math.random()*4)];
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),1000);
+  }
+}
+
+function goToMainPopup(){
+  prePopup.style.display="none";
+  birthdayBlast();
+  setTimeout(()=>{
+    mainPopup.style.display="flex";
+    song.currentTime=0;
+    song.play();
+  },400);
 }
 
 function closePopup(){
   mainPopup.style.display="none";
+  song.pause();
+  song.currentTime=0;
 }
 </script>
 
